@@ -16,13 +16,13 @@ public class EmployeeEntity {
 	private long id; // primary and generated
 	
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "userId")
+	@Column(name = "userid")
 	private String userId; // Generate with UUID and unique
     
-	@Column(name = "firstName")
+	@Column(name = "firstname")
 	private String firstName;
 	
-	@Column(name = "lastName")
+	@Column(name = "lastname")
 	private String lastName;
 	
 	@Column(name = "address")
@@ -34,10 +34,10 @@ public class EmployeeEntity {
 	@Column(name = "zip")
 	private String zip;
 	
-	@Column(name = "cellPhone")
+	@Column(name = "cellphone")
 	private String cellPhone;
 	
-	@Column(name = "homePhone")
+	@Column(name = "homephone")
 	private String homePhone
 	;
 	@Column(name = "email")
