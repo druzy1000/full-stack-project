@@ -1,4 +1,4 @@
-package com.ibm.fscc.repositories;
+package com.ibm.fscc.employeeservice.repositories;
 
 import java.util.List;
 
