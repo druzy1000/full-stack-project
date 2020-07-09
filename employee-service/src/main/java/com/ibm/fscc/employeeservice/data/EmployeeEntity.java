@@ -14,17 +14,33 @@ public class EmployeeEntity {
 	@Id
 	@Column(name = "id")
 	private long id; // primary and generated
+	
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "userId")
 	private String userId; // Generate with UUID and unique
-	@Column(name = "userId")
-	private String firstName; 
+    
+	@Column(name = "firstName")
+	private String firstName;
+	
+	@Column(name = "lastName")
 	private String lastName;
+	
+	@Column(name = "address")
 	private String address; 
+	
+	@Column(name = "state")
 	private String state;
+	
+	@Column(name = "zip")
 	private String zip;
+	
+	@Column(name = "cellPhone")
 	private String cellPhone;
-	private String homePhone;
+	
+	@Column(name = "homePhone")
+	private String homePhone
+	;
+	@Column(name = "email")
 	private String email; // Unique
 
 	public long getId() {
