@@ -1,0 +1,40 @@
+version: "3"
+services:
+  mongo:
+    image: mongo
+    container_name: mongodb
+    environment:
+      - MONGO_INITDB_DATABASE=login-db
+      - MONGO-INITDB_ROOT-USERNAME=admin
+      - MONGO-INITDB_ROOT-PASSWORD=PASSWORD
+    volumes:
+        - mongo:/data/db
+    #   - ./mongo-entrypoint:/docker-entrypoint-initdb.d
+    #   - mongoconfig:/data/configdb
+    ports:
+      - 27017-27019:27017-27019
+  mongoclient:
+    image: mongoclient/mongoclient
+    container_name: mclient
+    environment: 
+      - MONGO_SERVER=mongo
+      - MONGO_INITDB_DATABASE=login-db
+      - MONGO-INITDB_ROOT-USERNAME=admin
+      - MONGO-INITDB_ROOT-PASSWORD=PASSWORD
+    volumes:
+      - mongoclient:/data/db
+    networks:
+      - mongo_net
+    depends_on: 
+      - mongo
+    ports:
+      - 3000:3000
+
+volumes:
+  mongo:
+  mongoclient:
+
+networks:
+  mongo_net:
+    driver: bridge
+      

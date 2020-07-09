@@ -1,9 +1,23 @@
 package com.ibm.fscc.employeeservice.data;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "employee")
 public class EmployeeEntity {
 	
+	@Id
+	@Column(name = "id")
 	private long id; // primary and generated
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "userId")
 	private String userId; // Generate with UUID and unique
+	@Column(name = "userId")
 	private String firstName; 
 	private String lastName;
 	private String address; 
