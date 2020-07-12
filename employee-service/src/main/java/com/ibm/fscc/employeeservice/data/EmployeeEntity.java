@@ -1,16 +1,49 @@
 package com.ibm.fscc.employeeservice.data;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Entity
+@Table(name = "employee")
 public class EmployeeEntity {
 	
+	@Id
+	@Column(name = "id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id; // primary and generated
+
+	@Column(name = "userid")
 	private String userId; // Generate with UUID and unique
-	private String firstName; 
+    
+	@Column(name = "firstname")
+	private String firstName;
+	
+	@Column(name = "lastname")
 	private String lastName;
+	
+	@Column(name = "address")
 	private String address; 
+	
+	@Column(name = "state")
 	private String state;
+	
+	@Column(name = "zip")
 	private String zip;
+	
+	@Column(name = "cellphone")
 	private String cellPhone;
-	private String homePhone;
+	
+	@Column(name = "homephone")
+	private String homePhone
+	;
+	@Column(name = "email")
 	private String email; // Unique
 
 	public long getId() {

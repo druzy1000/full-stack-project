@@ -1,0 +1,57 @@
+version: "3"
+services:
+  mysql:
+    image: mysql:5.7
+    restart: always
+    container_name: mysql
+    environment:
+      MYSQL_DATABASE: 'employee'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - '3306:3306'
+    # expose:
+    #   - '3306'
+    volumes:
+      - employee:/var/lib/mysql
+
+  mongo:
+    image: mongo
+    container_name: mongodb
+    environment:
+      - MONGO_INITDB_DATABASE=login-db
+      - MONGO-INITDB_ROOT-USERNAME=admin
+      - MONGO-INITDB_ROOT-PASSWORD=PASSWORD
+    volumes:
+        - mongo:/data/db
+    #   - ./mongo-entrypoint:/docker-entrypoint-initdb.d
+    #   - mongoconfig:/data/configdb
+    ports:
+      - 27017-27019:27017-27019
+  mongoclient:
+    image: mongoclient/mongoclient
+    container_name: mclient
+    environment: 
+      - MONGO_SERVER=mongo
+      - MONGO_INITDB_DATABASE=login-db
+      - MONGO-INITDB_ROOT-USERNAME=admin
+      - MONGO-INITDB_ROOT-PASSWORD=PASSWORD
+    volumes:
+      - mongoclient:/data/db
+    # networks:
+    #   - mongo_net
+    depends_on: 
+      - mongo
+    ports:
+      - 3000:3000
+
+volumes:
+  mongo:
+  mongoclient:
+  employee:
+
+# networks:
+#   mongo_net:
+#     driver: bridge
+      
