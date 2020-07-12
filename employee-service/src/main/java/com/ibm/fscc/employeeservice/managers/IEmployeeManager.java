@@ -10,5 +10,5 @@ public interface IEmployeeManager  {
 	EmployeeEntity getEmployeeById(Long id);
 	EmployeeEntity createEmployee(EmployeeEntity employeeEntity);
 	EmployeeEntity updateEmployee(Long id, EmployeeEntity employeeEntity);
-	EmployeeEntity deleteEmployee(EmployeeEntity employeeEntity);
+	EmployeeEntity deleteEmployee(Long id);
 }

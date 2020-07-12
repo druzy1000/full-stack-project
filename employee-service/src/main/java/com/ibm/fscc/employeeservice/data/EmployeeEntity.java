@@ -7,15 +7,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "employee")
 public class EmployeeEntity {
 	
 	@Id
 	@Column(name = "id")
-	private long id; // primary and generated
-	
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+	private long id; // primary and generated
+
 	@Column(name = "userid")
 	private String userId; // Generate with UUID and unique
     
