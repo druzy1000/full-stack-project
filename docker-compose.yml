@@ -16,6 +16,22 @@ services:
     volumes:
       - mysql:/var/lib/mysql
 
+  mysql2:
+    image: mysql:5.7
+    restart: always
+    container_name: mysql2
+    environment:
+        MYSQL_DATABASE: 'login'
+        MYSQL_USER: 'root'
+        MYSQL_PASSWORD: 'password'
+        MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+        - '3307:3306'
+    # networks:
+    #     - login-mysql
+    volumes:
+        - mysql2:/var/lib/mysql2
+
   employee-service:
     container_name: employee-service
     restart: always
@@ -31,39 +47,11 @@ services:
     depends_on:
       - mysql
 
-  mongo:
-    image: mongo
-    container_name: mongodb
-    environment:
-      - MONGO_INITDB_DATABASE=login-db
-      - MONGO-INITDB_ROOT-USERNAME=admin
-      - MONGO-INITDB_ROOT-PASSWORD=PASSWORD
-    volumes:
-        - mongo:/data/db
-    #   - ./mongo-entrypoint:/docker-entrypoint-initdb.d
-    #   - mongoconfig:/data/configdb
-    ports:
-      - 27017-27019:27017-27019
 
-  mongoclient:
-    image: mongoclient/mongoclient
-    container_name: mclient
-    environment: 
-      - MONGO_SERVER=mongo
-      - MONGO_INITDB_DATABASE=login-db
-      - MONGO-INITDB_ROOT-USERNAME=admin
-      - MONGO-INITDB_ROOT-PASSWORD=PASSWORD
-    volumes:
-      - mongoclient:/data/db
-    depends_on: 
-      - mongo
-    ports:
-      - 3000:3000
 
 volumes:
-  mongo:
-  mongoclient:
   mysql:
+  mysql2:
 
 networks:
   employee-mysql:
