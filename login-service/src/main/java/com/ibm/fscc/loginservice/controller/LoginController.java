@@ -9,14 +9,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ibm.fscc.loginservice.data.LoginEntity;
-import com.ibm.fscc.loginservice.managers.iLoginManager;
+import com.ibm.fscc.loginservice.managers.ILoginManager;
 import com.ibm.fscc.loginservice.repository.LoginRepository;
 
 @RestController
-@RequestMapping(path="/login")
+@RequestMapping(path="api/login")
 public class LoginController {
 	
 	LoginRepository loginRepository;
+	
+	@Autowired
+	private ILoginManager iLoginManager;
 
 	@Autowired
 	private Environment env;
@@ -26,9 +29,10 @@ public class LoginController {
 		return "Working on port " + env.getProperty("server.port");
 	}
 	
-    @RequestMapping(method = RequestMethod.GET)
-    LoginEntity getUser(@RequestBody String email, String password) {
-        return iLoginManager.getUser(email,password);
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    LoginEntity getUser(@RequestBody String email) {
+        return iLoginManager.getUser(email);
     }
 
 }

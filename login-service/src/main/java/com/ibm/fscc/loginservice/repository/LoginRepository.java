@@ -2,10 +2,13 @@ package com.ibm.fscc.loginservice.repository;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import com.ibm.fscc.loginservice.data.LoginEntity;
 
-public interface LoginRepository extends JpaRepository<LoginEntity, String> {
+@Repository
+public interface LoginRepository extends CrudRepository<LoginEntity, String> {
 	
 
 }
