@@ -1,21 +1,23 @@
 package com.ibm.fscc.loginservice.data;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+
+//import javax.persistence.Column;
+
 import javax.persistence.Id;
-import javax.persistence.Table;
+//import javax.persistence.Table;
+//
+//import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
-@Table(name = "login")
+//@Table(name = "login")
 public class LoginEntity {
 
 	@Id
-	@Column(name = "email")
+//	@Column(name = "email")
 	private String email; // primary key
-	@Column(name = "password")
+//	@Column(name = "password")
 	private String password; // encrypted
 
 	public String getEmail() {

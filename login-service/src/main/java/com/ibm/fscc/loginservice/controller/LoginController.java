@@ -1,5 +1,7 @@
 package com.ibm.fscc.loginservice.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +32,12 @@ public class LoginController {
 	}
 	
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
+    public List<LoginEntity> getAllEmails() {
+        return iLoginManager.getAllEmails();
+    }
+	
+    @RequestMapping( method = RequestMethod.POST)
     LoginEntity getUser(@RequestBody String email) {
         return iLoginManager.getUser(email);
     }

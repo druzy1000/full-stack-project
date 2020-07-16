@@ -1,6 +1,8 @@
 package com.ibm.fscc.loginservice.managers.impl;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +19,15 @@ public class LoginManager implements ILoginManager {
 
 	@Override
 	public LoginEntity getUser(String email) {
-		return loginRepository.findById(email);
+		return loginRepository.getOne(email);
 	}
+
+
+	@Override
+	public List<LoginEntity> getAllEmails() {
+		return loginRepository.findAll();
+	}
+
+
 
 }
