@@ -15,7 +15,7 @@ import com.ibm.fscc.loginservice.managers.ILoginManager;
 import com.ibm.fscc.loginservice.repository.LoginRepository;
 
 @RestController
-@RequestMapping(path="api/login")
+@RequestMapping(path="api")
 public class LoginController {
 	
 	LoginRepository loginRepository;
