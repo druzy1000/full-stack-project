@@ -12,9 +12,26 @@ services:
     ports:
       - '3306:3306'
     networks:
-      - employee-mysql
+      - mysql-network
     volumes:
       - mysql:/var/lib/mysql
+
+  postgres:
+    image: postgres
+    restart: always
+    container_name: postgres
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=login
+    ports:
+        - '5432:5432'
+    networks:
+      - mysql-network
+    volumes:
+      - postgres:/var/lib/postgres
+
+    
 
   employee-service:
     container_name: employee-service
@@ -23,48 +40,42 @@ services:
       - spring.datasource.url=jdbc:mysql://mysql:3306/employee
       - spring.datasource.username=user
       - spring.datasource.password=password
-    image: fullstackcodingchallenge:latest
+    build: 
+      context: ./employee-service/
+      dockerfile: Dockerfile
+    # image: employeeService:latest
     ports: 
       - 8082:8082
     networks:
-      - employee-mysql
+      - mysql-network
     depends_on:
       - mysql
 
-  mongo:
-    image: mongo
-    container_name: mongodb
+  login-service:
+    container_name: login-service
+    restart: always
     environment:
-      - MONGO_INITDB_DATABASE=login-db
-      - MONGO-INITDB_ROOT-USERNAME=admin
-      - MONGO-INITDB_ROOT-PASSWORD=PASSWORD
-    volumes:
-        - mongo:/data/db
-    #   - ./mongo-entrypoint:/docker-entrypoint-initdb.d
-    #   - mongoconfig:/data/configdb
-    ports:
-      - 27017-27019:27017-27019
-
-  mongoclient:
-    image: mongoclient/mongoclient
-    container_name: mclient
-    environment: 
-      - MONGO_SERVER=mongo
-      - MONGO_INITDB_DATABASE=login-db
-      - MONGO-INITDB_ROOT-USERNAME=admin
-      - MONGO-INITDB_ROOT-PASSWORD=PASSWORD
-    volumes:
-      - mongoclient:/data/db
-    depends_on: 
-      - mongo
-    ports:
-      - 3000:3000
+      - spring.datasource.url=jdbc:postgresql://postgres:5432/login
+      - spring.datasource.username=root
+      - spring.datasource.password=password
+      - spring.jpa.hibernate.ddl-auto=create
+    build: 
+      context: ./login-service/
+      dockerfile: Dockerfile
+    # image: LoginService:latest
+    ports: 
+      - 8081:8081
+    networks:
+      - mysql-network
+    depends_on:
+      - postgres
+    # command: "mvn clean spring-boot:run"
 
 volumes:
-  mongo:
-  mongoclient:
   mysql:
+  postgres:
 
 networks:
-  employee-mysql:
+  mysql-network:
+    # driver: bridge
       
