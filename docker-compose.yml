@@ -31,8 +31,6 @@ services:
     volumes:
       - postgres:/var/lib/postgres
 
-    
-
   employee-service:
     container_name: employee-service
     restart: always
@@ -69,7 +67,28 @@ services:
       - mysql-network
     depends_on:
       - postgres
-    # command: "mvn clean spring-boot:run"
+
+  api-gateway:
+    container_name: api-gateway
+    restart: always
+    environment:
+      - zuul.routes.login.path=/login/**
+      - zuul.routes.login.url=http://127.0.0.1:8081/
+      - zuul.routes.employee.path=/employee/**
+      - zuul.routes.employee.url=http://127.0.0.1:8082/
+      - ribbon.eureka.enabled=false
+      - eureka.client.fetch-registry=false
+      - eureka.client.register-with-eureka=false
+    build: 
+      context: ./api-gateway/
+      dockerfile: Dockerfile
+    ports: 
+      - 8080:8080
+    networks:
+      - mysql-network
+    depends_on:
+      - employee-service
+      - login-service
 
 volumes:
   mysql:
