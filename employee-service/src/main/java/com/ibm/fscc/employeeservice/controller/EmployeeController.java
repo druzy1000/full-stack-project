@@ -2,11 +2,10 @@ package com.ibm.fscc.employeeservice.controller;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.http.HttpStatus;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,21 +18,34 @@ import com.ibm.fscc.employeeservice.data.EmployeeEntity;
 import com.ibm.fscc.employeeservice.managers.IEmployeeManager;
 import com.ibm.fscc.employeeservice.repositories.EmployeeRepository;
 
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
+
 
 
 @RestController
-@RequestMapping(path = "api/employee")
+@RequestMapping(path = "api")
 public class EmployeeController {
 	
 
 	
 	EmployeeRepository employeeRepository;
+	
 
 	@Autowired
 	private Environment env;
 	
 	@Autowired
 	private IEmployeeManager iEmployeeManager;
+	
+	@Autowired
+	private DiscoveryClient discoveryClient;
+
+	@RequestMapping("/service-instances/{applicationName}")
+	public List<ServiceInstance> serviceInstancesByApplicationName(
+			@PathVariable String applicationName) {
+		return this.discoveryClient.getInstances(applicationName);
+	}
 
 	@GetMapping(path = "/status/check")
 	public String status() {
