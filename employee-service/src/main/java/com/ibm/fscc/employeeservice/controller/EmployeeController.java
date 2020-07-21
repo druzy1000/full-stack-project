@@ -18,6 +18,9 @@ import com.ibm.fscc.employeeservice.data.EmployeeEntity;
 import com.ibm.fscc.employeeservice.managers.IEmployeeManager;
 import com.ibm.fscc.employeeservice.repositories.EmployeeRepository;
 
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
+
 
 
 @RestController
@@ -27,12 +30,22 @@ public class EmployeeController {
 
 	
 	EmployeeRepository employeeRepository;
+	
 
 	@Autowired
 	private Environment env;
 	
 	@Autowired
 	private IEmployeeManager iEmployeeManager;
+	
+	@Autowired
+	private DiscoveryClient discoveryClient;
+
+	@RequestMapping("/service-instances/{applicationName}")
+	public List<ServiceInstance> serviceInstancesByApplicationName(
+			@PathVariable String applicationName) {
+		return this.discoveryClient.getInstances(applicationName);
+	}
 
 	@GetMapping(path = "/status/check")
 	public String status() {
