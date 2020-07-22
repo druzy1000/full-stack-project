@@ -5,7 +5,7 @@
 # COPY pom.xml /build
 # RUN mvn -B dependency:resolve dependency:resolve-plugins
 # COPY src /build/src
-# RUN mvn package -DskipTests
+# RUN mvn clean install -DskipTests
 
 FROM openjdk:8-jdk-alpine
 LABEL maintainer="andrew.reyes@ibm.com"

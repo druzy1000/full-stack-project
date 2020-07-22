@@ -13,7 +13,7 @@ import { MessageService } from '../message.service';
 // @Injectable()
 export class EmployeeRestStorageService {
 
-  baseUrl: string = 'http://localhost:8082/api';
+  baseUrl: string = 'http://localhost:8080/employee/api';
 
   constructor(private http: HttpClient, private messageService: MessageService){}
 
