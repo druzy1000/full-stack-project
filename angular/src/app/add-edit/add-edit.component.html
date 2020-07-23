@@ -52,7 +52,7 @@
         </span>
       </div>
 
-      <div class="row form-group">
+      <!-- <div class="row form-group">
         <span class ="col-sm-2">City:</span>
         <span class="col-sm-4">
             <input class="form-control"
@@ -66,7 +66,7 @@
                 <div *ngIf="f.city.errors.pattern">City can only be letters.</div>
             </div>
         </span>
-      </div>
+      </div> -->
 
       <div class="row form-group">
           <span class ="col-sm-2">State:</span>
@@ -107,13 +107,13 @@
               <span class="col-sm-4">
                   <input class="form-control"
                   type="text"
-                  formControlName="homeNumber"
-                  [ngClass]="{ 'is-invalid': submitted && f.homeNumber.errors }">
-                  <div *ngIf="submitted && f.homeNumber.errors" class="invalid-feedback">
-                      <div *ngIf="f.homeNumber.errors.required">Home Phone is required.</div>
-                      <div *ngIf="f.homeNumber.errors.minlength">Home Phone must be at least 10 characters.</div>
-                      <div *ngIf="f.homeNumber.errors.maxlength">Home Phone must be at most 10 characters.</div>
-                      <div *ngIf="f.homeNumber.errors.pattern">Home Phone can only be numbers.</div>
+                  formControlName="homePhone"
+                  [ngClass]="{ 'is-invalid': submitted && f.homePhone.errors }">
+                  <div *ngIf="submitted && f.homePhone.errors" class="invalid-feedback">
+                      <div *ngIf="f.homePhone.errors.required">Home Phone is required.</div>
+                      <div *ngIf="f.homePhone.errors.minlength">Home Phone must be at least 10 characters.</div>
+                      <div *ngIf="f.homePhone.errors.maxlength">Home Phone must be at most 10 characters.</div>
+                      <div *ngIf="f.homePhone.errors.pattern">Home Phone can only be numbers.</div>
                   </div>
               </span>
             </div>

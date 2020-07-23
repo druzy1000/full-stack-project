@@ -31,23 +31,23 @@ services:
     volumes:
       - postgres:/var/lib/postgres
 
-  employee-service:
-    container_name: employee-service
-    restart: always
-    environment:
-      - spring.datasource.url=jdbc:mysql://mysql:3306/employee
-      - spring.datasource.username=user
-      - spring.datasource.password=password
-      - eureka.client.service-url.defaultZone=http://discovery-service:8761/eureka/
-    build: 
-      context: ./employee-service/
-      dockerfile: Dockerfile
-    ports: 
-      - 8082:8082
-    networks:
-      - mysql-network
-    depends_on:
-      - mysql
+  # employee-service:
+  #   container_name: employee-service
+  #   restart: always
+  #   environment:
+  #     - spring.datasource.url=jdbc:mysql://mysql:3306/employee
+  #     - spring.datasource.username=user
+  #     - spring.datasource.password=password
+  #     - eureka.client.service-url.defaultZone=http://discovery-service:8761/eureka/
+  #   build: 
+  #     context: ./employee-service/
+  #     dockerfile: Dockerfile
+  #   ports: 
+  #     - 8082:8082
+  #   networks:
+  #     - mysql-network
+  #   depends_on:
+  #     - mysql
 
   login-service:
     container_name: login-service
@@ -87,7 +87,7 @@ services:
     networks:
       - mysql-network
     depends_on:
-      - employee-service
+      # - employee-service
       - login-service
 
   discovery-service:

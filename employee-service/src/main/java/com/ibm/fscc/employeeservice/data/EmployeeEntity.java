@@ -9,6 +9,9 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+//import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "employee")
@@ -33,6 +36,9 @@ public class EmployeeEntity {
 	
 	@Column(name = "state")
 	private String state;
+	
+	@Column(name = "city")
+	private String city;
 	
 	@Column(name = "zip")
 	private String zip;
@@ -85,6 +91,15 @@ public class EmployeeEntity {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	
+	public String city() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
 
 	public String getState() {
 		return state;

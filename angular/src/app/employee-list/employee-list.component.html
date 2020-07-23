@@ -12,7 +12,7 @@
 </thead>
 <tbody >
   <tr *ngFor = "let employee of employees;">
-    <td ><a [routerLink]="['/edit', employee.employeeId]" >{{employee.firstName + " " + employee.lastName}}</a></td>
+    <td ><a [routerLink]="['/edit', employee.id]" >{{employee.firstName + " " + employee.lastName}}</a></td>
       <td>{{employee.email}}</td>
   </tr>
 </tbody>

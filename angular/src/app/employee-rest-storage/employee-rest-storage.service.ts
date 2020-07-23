@@ -13,8 +13,7 @@ import { MessageService } from '../message.service';
 // @Injectable()
 export class EmployeeRestStorageService {
 
-  baseUrl: string = 'http://localhost:8080/employee/api';
-
+  baseUrl: string = 'http://127.0.0.1:8082/api';
   constructor(private http: HttpClient, private messageService: MessageService){}
 
 getEmployees(): Observable<Employee[]>{
@@ -23,26 +22,26 @@ getEmployees(): Observable<Employee[]>{
 getEmployee(id: number): Observable<Employee>{
   //const url = `${this.baseUrl}/${id}`;
   return this.http.get<Employee>(`${this.baseUrl}/${id}`).pipe(
-    tap(_ => this.log(`fetched employee id=${id}`)),
+    tap(_ => { console.log(id)}),
     catchError(this.handleError<Employee>(`getEmployee id=${id}`))
   )
 }
 
 addEmployee(employee: Employee): Observable<Employee> {
-  return this.http.post<Employee>(this.baseUrl, employee, httpOptions).pipe(
-  tap((newEmployee: Employee) => this.log(`added Employee w/ id=${newEmployee.userId}`)),
+  return this.http.post<Employee>(`${this.baseUrl}/add`, employee, httpOptions).pipe(
+  tap((newEmployee: Employee) => this.log(`added Employee w/ id=${newEmployee.id}`)),
   catchError(this.handleError<Employee>('addEmployee')));
 }
 
 updateEmployee(employee:Employee): Observable<void> {
-  return this.http.put<void>(`${this.baseUrl}/${employee.userId}`, employee, httpOptions).pipe(
-    tap(_ => this.log(`updated employee id=${employee.userId}`)),
+  return this.http.put<void>(`${this.baseUrl}/${employee.id}`, employee, httpOptions).pipe(
+    tap(_ => this.log(`updated employee id=${employee.id}`)),
     catchError(this.handleError<void>('updateEmployee'))
   );
 }
 
-// update (employee : Employee) : Observable<Employee> {
-//   return this.http.put<HttpResponse<Employee>>(this.baseUrl + '/' + employee.employeeId, httpOptions)
+// updateEmployee (employee : Employee) : Observable<Employee> {
+//   return this.http.put<HttpResponse<Employee>>(this.baseUrl + '/' + employee.id, httpOptions)
 //     .pipe(map(response => {
 //       return employee;
 //     }));

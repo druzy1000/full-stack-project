@@ -20,6 +20,7 @@ export class AddEditComponent implements OnInit {
   @Input() employee;
 
 
+
   constructor(private employeeRestStorageService: EmployeeRestStorageService, 
               private formBuilder: FormBuilder,
               private route:ActivatedRoute,
@@ -33,22 +34,22 @@ export class AddEditComponent implements OnInit {
       firstName: ['',[Validators.required, Validators.minLength(2),Validators.maxLength(35), Validators.pattern("[A-Za-z]*")]],
       lastName: ['',[Validators.required, Validators.minLength(2),Validators.maxLength(35), Validators.pattern("[A-Za-z]*")]],
       address: ['',[Validators.required, Validators.minLength(10),Validators.maxLength(50), Validators.pattern("[A-Za-z\\'\\- 0-9]*")]],
-      city: ['',[Validators.required, Validators.minLength(5),Validators.maxLength(50), Validators.pattern("[A-Za-z]*")]],
+      // city: ['',[Validators.required, Validators.minLength(5),Validators.maxLength(50), Validators.pattern("[A-Za-z]*")]],
       state: ['',[Validators.required, Validators.minLength(2), Validators.maxLength(2), Validators.pattern("[A-Za-z]*")]],
       zip: ['',[Validators.required, Validators.minLength(5),Validators.maxLength(9), Validators.pattern("[0-9]*")]],
-      homeNumber: ['',[Validators.required, Validators.minLength(10),Validators.maxLength(10), Validators.pattern("[0-9]*")]],
+      homePhone: ['',[Validators.required, Validators.minLength(10),Validators.maxLength(10), Validators.pattern("[0-9]*")]],
       cellPhone: ['',[Validators.required, Validators.minLength(10),Validators.maxLength(10), Validators.pattern("[0-9]*")]],
       email: ['',[Validators.required, Validators.minLength(10),Validators.maxLength(50),Validators.email]]
     });
   }
-
+    get id() { return this.addEditForm.get('id'); }
     get firstName() { return this.addEditForm.get('firstName'); }
     get lastName() { return this.addEditForm.get('lastName'); }
     get address() { return this.addEditForm.get('address'); }
-    get city() { return this.addEditForm.get('city'); }
+    // get city() { return this.addEditForm.get('city'); }
     get state() { return this.addEditForm.get('state'); }
     get zip() { return this.addEditForm.get('zip'); }
-    get homeNumber() { return this.addEditForm.get('homeNumber'); }
+    get homePhone() { return this.addEditForm.get('homePhone'); }
     get cellPhone() { return this.addEditForm.get('cellPhone'); }
     get email() { return this.addEditForm.get('email'); }
 
@@ -84,20 +85,21 @@ onUpdateEmployee() {
 }
 
 getEmployee(employeeId:number) {
-  console.log(employeeId);
+  console.log(employeeId)
   if(employeeId === 0){
     this.employee = {
-      employeeId: null,
+      id: null,
+      userId: null,
       firstName: null,
       lastName: null,
       address: null,
       city: null,
       state: null,
       zip: null,
-      homeNumber: null,
+      homePhone: null,
       cellPhone: null,
       email: null,
-      password: null
+      // password: null
     }
   }
   else{
@@ -108,10 +110,10 @@ getEmployee(employeeId:number) {
           firstName: this.employee.firstName,
           lastName: this.employee.lastName,
           address: this.employee.address,
-          city: this.employee.city,
+          // city: this.employee.city,
           state: this.employee.state,
           zip: this.employee.zip,
-          homeNumber: this.employee.homeNumber,
+          homePhone: this.employee.homePhone,
           cellPhone: this.employee.cellPhone,
           email: this.employee.email
         })
@@ -123,18 +125,18 @@ extractEmployeeFromForm() {
   this.employee.firstName =  this.addEditForm.value.firstName;
   this.employee.lastName = this.addEditForm.value.lastName;
   this.employee.address = this.addEditForm.value.address;
-  this.employee.city = this.addEditForm.value.city;
+  // this.employee.city = this.addEditForm.value.city;
   this.employee.state = this.addEditForm.value.state;
   this.employee.zip = this.addEditForm.value.zip;
-  this.employee.homeNumber = this.addEditForm.value.homeNumber;
+  this.employee.homePhone = this.addEditForm.value.homePhone;
   this.employee.cellPhone = this.addEditForm.value.cellPhone;
   this.employee.email = this.addEditForm.value.email;
 }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(parameterMap =>{
-      const employeeId = +parameterMap.get('employeeId')
-      this.getEmployee(employeeId);
+    this.route.paramMap.subscribe(params =>{
+     const id = +params.get('id')
+      this.getEmployee(id);
     })
     this.createForm();
   }
