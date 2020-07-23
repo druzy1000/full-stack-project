@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var Employee = /** @class */ (function () {
     function Employee() {
         this.id = -1;
-        this.userId = "";
+        // this.userId = "";
         this.firstName = "";
         this.lastName = "";
         this.address = "";

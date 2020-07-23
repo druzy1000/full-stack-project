@@ -34,7 +34,7 @@ export class AddEditComponent implements OnInit {
       firstName: ['',[Validators.required, Validators.minLength(2),Validators.maxLength(35), Validators.pattern("[A-Za-z]*")]],
       lastName: ['',[Validators.required, Validators.minLength(2),Validators.maxLength(35), Validators.pattern("[A-Za-z]*")]],
       address: ['',[Validators.required, Validators.minLength(10),Validators.maxLength(50), Validators.pattern("[A-Za-z\\'\\- 0-9]*")]],
-      // city: ['',[Validators.required, Validators.minLength(5),Validators.maxLength(50), Validators.pattern("[A-Za-z]*")]],
+      city: ['',[Validators.required, Validators.minLength(5),Validators.maxLength(50), Validators.pattern("[A-Za-z ]*")]],
       state: ['',[Validators.required, Validators.minLength(2), Validators.maxLength(2), Validators.pattern("[A-Za-z]*")]],
       zip: ['',[Validators.required, Validators.minLength(5),Validators.maxLength(9), Validators.pattern("[0-9]*")]],
       homePhone: ['',[Validators.required, Validators.minLength(10),Validators.maxLength(10), Validators.pattern("[0-9]*")]],
@@ -46,7 +46,7 @@ export class AddEditComponent implements OnInit {
     get firstName() { return this.addEditForm.get('firstName'); }
     get lastName() { return this.addEditForm.get('lastName'); }
     get address() { return this.addEditForm.get('address'); }
-    // get city() { return this.addEditForm.get('city'); }
+    get city() { return this.addEditForm.get('city'); }
     get state() { return this.addEditForm.get('state'); }
     get zip() { return this.addEditForm.get('zip'); }
     get homePhone() { return this.addEditForm.get('homePhone'); }
@@ -54,11 +54,7 @@ export class AddEditComponent implements OnInit {
     get email() { return this.addEditForm.get('email'); }
 
 onAddEmployee() {
-  console.log('addEditForm' , this.addEditForm.value);
-  console.log('Clicked onAdd Employee!');
   this.submitted = true;
-
-  // stop here if form is invalid
   if (this.addEditForm.invalid) {
     console.log("Invalid")
       return;
@@ -76,12 +72,26 @@ onAddEmployee() {
 }
 
 onUpdateEmployee() {
-  console.log('EditFORM:' , this.addEditForm.value);
-  console.log('Clicked onUpdate Employee!');
+  this.submitted = true;
+  if (this.addEditForm.invalid) {
+    console.log("Invalid")
+      return;
+  }
   this.extractEmployeeFromForm();
+  this.loading = true;
   this.employeeRestStorageService.updateEmployee(this.employee).subscribe(
     () => this.router.navigate(['employeeList'])
   )
+}
+
+onSubmit(){
+  if(this.employee.employeeId === null){
+    this.onAddEmployee();
+  }
+  else {
+    this.onUpdateEmployee();
+  }
+
 }
 
 getEmployee(employeeId:number) {
@@ -110,7 +120,7 @@ getEmployee(employeeId:number) {
           firstName: this.employee.firstName,
           lastName: this.employee.lastName,
           address: this.employee.address,
-          // city: this.employee.city,
+          city: this.employee.city,
           state: this.employee.state,
           zip: this.employee.zip,
           homePhone: this.employee.homePhone,
@@ -125,7 +135,7 @@ extractEmployeeFromForm() {
   this.employee.firstName =  this.addEditForm.value.firstName;
   this.employee.lastName = this.addEditForm.value.lastName;
   this.employee.address = this.addEditForm.value.address;
-  // this.employee.city = this.addEditForm.value.city;
+  this.employee.city = this.addEditForm.value.city;
   this.employee.state = this.addEditForm.value.state;
   this.employee.zip = this.addEditForm.value.zip;
   this.employee.homePhone = this.addEditForm.value.homePhone;

@@ -92,14 +92,13 @@ public class EmployeeEntity {
 		this.address = address;
 	}
 	
-	public String city() {
+	public String getCity() {
 		return city;
 	}
 
 	public void setCity(String city) {
 		this.city = city;
 	}
-
 
 	public String getState() {
 		return state;

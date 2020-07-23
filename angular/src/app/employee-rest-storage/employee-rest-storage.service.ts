@@ -13,7 +13,7 @@ import { MessageService } from '../message.service';
 // @Injectable()
 export class EmployeeRestStorageService {
 
-  baseUrl: string = 'http://127.0.0.1:8082/api';
+  baseUrl: string = 'http://127.0.0.1:8080/employee/api';
   constructor(private http: HttpClient, private messageService: MessageService){}
 
 getEmployees(): Observable<Employee[]>{
@@ -34,7 +34,7 @@ addEmployee(employee: Employee): Observable<Employee> {
 }
 
 updateEmployee(employee:Employee): Observable<void> {
-  return this.http.put<void>(`${this.baseUrl}/${employee.id}`, employee, httpOptions).pipe(
+  return this.http.put<void>(`${this.baseUrl}/edit/${employee.id}`, employee, httpOptions).pipe(
     tap(_ => this.log(`updated employee id=${employee.id}`)),
     catchError(this.handleError<void>('updateEmployee'))
   );

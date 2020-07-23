@@ -3,7 +3,7 @@ import { Person } from './Person';
 export class Employee {
 
     id: number;
-    userId: string;
+    // userId: string;
     firstName: string;
     lastName: string;
     address: string;
