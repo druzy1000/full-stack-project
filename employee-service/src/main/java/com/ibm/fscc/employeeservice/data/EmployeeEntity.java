@@ -34,6 +34,9 @@ public class EmployeeEntity {
 	@Column(name = "state")
 	private String state;
 	
+	@Column(name = "city")
+	private String city;
+	
 	@Column(name = "zip")
 	private String zip;
 	
@@ -84,6 +87,14 @@ public class EmployeeEntity {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 	public String getState() {

@@ -2,14 +2,8 @@ package com.ibm.fscc.employeeservice.managers.impl;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import com.ibm.fscc.employeeservice.controller.EmployeeController;
 import com.ibm.fscc.employeeservice.data.EmployeeEntity;
 import com.ibm.fscc.employeeservice.managers.IEmployeeManager;
 import com.ibm.fscc.employeeservice.repositories.EmployeeRepository;
@@ -17,7 +11,6 @@ import com.ibm.fscc.employeeservice.repositories.EmployeeRepository;
 @Component
 public class EmployeeManager implements IEmployeeManager {
 	
-	   private final Logger LOG = LoggerFactory.getLogger(EmployeeManager.class);
 	
 	@Autowired
 	EmployeeRepository employeeRepository;

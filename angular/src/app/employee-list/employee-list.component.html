@@ -1,0 +1,20 @@
+
+<div class="container">
+<br>
+<a [routerLink]="['/add']" class="btn btn-primary" role="button" aria-pressed="true">Add Employee</a>
+
+<table class="table table-hover">
+<thead class="thead-light">
+<tr>
+    <th>Name</th>
+    <th>Email</th>
+</tr>
+</thead>
+<tbody >
+  <tr *ngFor = "let employee of employees;">
+    <td ><a [routerLink]="['/edit', employee.id]" >{{employee.firstName + " " + employee.lastName}}</a></td>
+      <td>{{employee.email}}</td>
+  </tr>
+</tbody>
+</table>
+</div>
