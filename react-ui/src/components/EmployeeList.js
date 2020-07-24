@@ -61,7 +61,7 @@ class EmployeeList extends React.Component {
                         employee => 
                         <tr key={employee.id}>
                             <td> 
-                                <Link to ={`/edit/${employee.id}`}>{employee.first_NAME} {employee.last_NAME}</Link>
+                                <Link to ={`/edit/${employee.id}`}>{employee.firstName} {employee.lastName}</Link>
                             </td>
                             <td>{employee.email}</td>
                             <td>
