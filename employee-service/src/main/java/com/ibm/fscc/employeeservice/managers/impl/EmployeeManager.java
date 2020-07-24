@@ -27,7 +27,6 @@ public class EmployeeManager implements IEmployeeManager {
 
 	@Override
 	public EmployeeEntity createEmployee(EmployeeEntity employee) {
-		System.out.println(employee);
 		return employeeRepository.saveAndFlush(employee);
 	}
 

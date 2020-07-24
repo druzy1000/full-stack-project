@@ -10,6 +10,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { AddEditComponent } from './add-edit/add-edit.component';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { EmployeeRestStorageService } from './employee-rest-storage/employee-rest-storage.service';
+import { LoginComponent } from './login/login.component';
+import { MessagesComponent } from './messages/messages.component';
+
 
 import { NavbarComponent } from './navbar/navbar.component';
 
@@ -18,7 +21,9 @@ import { NavbarComponent } from './navbar/navbar.component';
     AppComponent,
     AddEditComponent,
     EmployeeListComponent,
-    NavbarComponent
+    LoginComponent,
+    NavbarComponent,
+    MessagesComponent,
 
   ],
   imports: [
