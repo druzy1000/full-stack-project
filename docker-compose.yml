@@ -114,6 +114,21 @@ services:
       - 3000:3000
     networks:
       - mysql-network
+    depends_on:
+      - discovery-service
+
+  angular-ui:
+    container_name: angular-ui
+    restart: always
+    build: 
+      context: ./angular/
+      dockerfile: Dockerfile
+    ports: 
+      - 4200:4200
+    networks:
+      - mysql-network
+    depends_on:
+      - discovery-service
 
 volumes:
   mysql:
