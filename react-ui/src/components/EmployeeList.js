@@ -64,9 +64,9 @@ class EmployeeList extends React.Component {
                                 <Link to ={`/edit/${employee.id}`}>{employee.firstName} {employee.lastName}</Link>
                             </td>
                             <td>{employee.email}</td>
-                            <td>
+                            {/* <td>
                                 <button onClick={()=>{this.onDeleteEmployees(employee.id)}} >Delete</button>
-                            </td>
+                            </td> */}
                         </tr>
                     )
                 }

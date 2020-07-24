@@ -14,14 +14,14 @@ class AddEdit extends React.Component {
     if(this.props.match.params.id !== undefined){
       this.state = {
         employee: {
-          id: this.props.match.params.id, first_NAME:"", last_NAME:"", address:"", city:"", state:"", zip:"", home_PHONE:"", cell_PHONE:"", email:""
+          id: this.props.match.params.id, firstName:"", lastName:"", address:"", city:"", state:"", zip:"", homePhone:"", cellPhone:"", email:""
         }
       }
     }
     else{
       this.state = {
         employee: {
-          id: -1,first_NAME:"", last_NAME:"", address:"", city:"", state:"", zip:"", home_PHONE:"", cell_PHONE:"", email:""
+          id: -1,firstName:"", lastName:"", address:"", city:"", state:"", zip:"", homePhone:"", cellPhone:"", email:""
         }
       }
     }
@@ -44,14 +44,14 @@ class AddEdit extends React.Component {
             this.setState({
               employee:{
                 id: response.data.id,
-                first_NAME: response.data.first_NAME,
-                last_NAME: response.data.last_NAME,
+                firstName: response.data.firstName,
+                lastName: response.data.lastName,
                 address: response.data.address,
                 city: response.data.city,
                 state: response.data.state,
                 zip: response.data.zip,
-                home_PHONE: response.data.home_PHONE,
-                cell_PHONE: response.data.cell_PHONE,
+                homePhone: response.data.homePhone,
+                cellPhone: response.data.cellPhone,
                 email: response.data.email
               }
             })
@@ -107,7 +107,7 @@ class AddEdit extends React.Component {
   }
 
   render(){
-     let { first_NAME,last_NAME,address,city,state,zip,home_PHONE,cell_PHONE,email } = this.state.employee
+     let { firstName,lastName,address,city,state,zip,homePhone,cellPhone,email } = this.state.employee
     return (
       <div className="container">
       <form>
@@ -115,20 +115,20 @@ class AddEdit extends React.Component {
         <label>First Name</label>
         <input 
             type="text" 
-            name="first_NAME" 
-            value={first_NAME}
+            name="firstName" 
+            value={firstName}
             onChange ={this.handleChange}
         />
-        <div className = "valid">{this.validator.message('First Name', this.state.employee.first_NAME, 'required|alpha|min:2|max:35')}</div>
+        <div className = "valid">{this.validator.message('First Name', this.state.employee.firstName, 'required|alpha_space|min:2|max:35')}</div>
 
         <label>Last Name</label>
         <input 
             type="text" 
-            name="last_NAME" 
-            value={last_NAME}
+            name="lastName" 
+            value={lastName}
             onChange ={this.handleChange}
         />
-        <div className = "valid">{this.validator.message('Last Name', this.state.employee.last_NAME, 'required|alpha|min:2|max:35')}</div>
+        <div className = "valid">{this.validator.message('Last Name', this.state.employee.lastName, 'required|alpha_space|min:2|max:35')}</div>
 
         <label>Address</label>
         <input 
@@ -146,7 +146,7 @@ class AddEdit extends React.Component {
             value={city}
             onChange ={this.handleChange}
         />
-        <div className = "valid">{this.validator.message('City', this.state.employee.city, 'required|alpha|min:5|max:50')}</div>
+        <div className = "valid">{this.validator.message('City', this.state.employee.city, 'required|alpha_space|min:5|max:50')}</div>
 
         <label>State</label>
         <select
@@ -221,19 +221,19 @@ class AddEdit extends React.Component {
         <label>Home Phone</label>
         <input 
             type="text" 
-            name="home_PHONE" 
-            value={home_PHONE}
+            name="homePhone" 
+            value={homePhone}
             onChange ={this.handleChange}
         />
-        <div className = "valid">{this.validator.message('Home Phone', this.state.employee.home_PHONE, 'required|phone|min:10|max:10')}</div>
+        <div className = "valid">{this.validator.message('Home Phone', this.state.employee.homePhone, 'required|phone|min:10|max:10')}</div>
         <label>Cell Phone</label>
         <input 
             type="text" 
-            name="cell_PHONE" 
-            value={cell_PHONE}
+            name="cellPhone" 
+            value={cellPhone}
             onChange ={this.handleChange}
         />
-        <div className = "valid">{this.validator.message('Cell Phone', this.state.employee.cell_PHONE, 'required|phone|min:10|max:10')}</div>
+        <div className = "valid">{this.validator.message('Cell Phone', this.state.employee.cellPhone, 'required|phone|min:10|max:10')}</div>
         <label>Email</label>
         <input 
             type="email" 
