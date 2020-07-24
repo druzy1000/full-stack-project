@@ -23,7 +23,7 @@ import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 
 
-@CrossOrigin(origins = "http://127.0.0.1:4200")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(path = "api")
 public class EmployeeController {
