@@ -104,6 +104,17 @@ services:
     networks:
       - mysql-network
 
+  react-ui:
+    container_name: react-ui
+    restart: always
+    build: 
+      context: ./react-ui/
+      dockerfile: Dockerfile
+    ports: 
+      - 3000:3000
+    networks:
+      - mysql-network
+
 volumes:
   mysql:
   postgres:
