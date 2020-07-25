@@ -11,7 +11,6 @@ import com.ibm.fscc.employeeservice.repositories.EmployeeRepository;
 @Component
 public class EmployeeManager implements IEmployeeManager {
 	
-	
 	@Autowired
 	EmployeeRepository employeeRepository;
 

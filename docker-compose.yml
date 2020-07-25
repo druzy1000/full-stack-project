@@ -2,7 +2,7 @@ version: "3"
 services:
   mysql:
     image: mysql:5.7
-    restart: always
+    restart: on-failure
     container_name: mysql
     environment:
       MYSQL_DATABASE: 'employee'
@@ -18,7 +18,7 @@ services:
 
   postgres:
     image: postgres
-    restart: always
+    restart: on-failure
     container_name: postgres
     environment:
       - POSTGRES_USER=root
@@ -33,11 +33,12 @@ services:
 
   employee-service:
     container_name: employee-service
-    restart: always
+    restart: on-failure
     environment:
       - spring.datasource.url=jdbc:mysql://mysql:3306/employee
-      - spring.datasource.username=user
+      - spring.datasource.username=root
       - spring.datasource.password=password
+      - spring.jpa.hibernate.ddl-auto=none
       - eureka.client.service-url.defaultZone=http://discovery-service:8761/eureka/
     build: 
       context: ./employee-service/
@@ -51,7 +52,7 @@ services:
 
   login-service:
     container_name: login-service
-    restart: always
+    restart: on-failure
     environment:
       - spring.datasource.url=jdbc:postgresql://postgres:5432/login
       - spring.datasource.username=root
@@ -70,7 +71,7 @@ services:
 
   api-gateway:
     container_name: api-gateway
-    restart: always
+    restart: on-failure
     environment:
       - zuul.routes.login.path=/login/**
       - zuul.routes.login.url=http://login-service:8081/
@@ -92,7 +93,7 @@ services:
 
   discovery-service:
     container_name: discovery-service
-    restart: always
+    restart: on-failure
     environment:
       - eureka.client.register-with-eureka=false
       - eureka.client.fetch-registry=false
@@ -106,7 +107,7 @@ services:
 
   react-ui:
     container_name: react-ui
-    restart: always
+    restart: on-failure
     build: 
       context: ./react-ui/
       dockerfile: Dockerfile
@@ -115,11 +116,11 @@ services:
     networks:
       - mysql-network
     depends_on:
-      - discovery-service
+      - api-gateway
 
   angular-ui:
     container_name: angular-ui
-    restart: always
+    restart: on-failure
     build: 
       context: ./angular/
       dockerfile: Dockerfile
@@ -128,7 +129,7 @@ services:
     networks:
       - mysql-network
     depends_on:
-      - discovery-service
+      - api-gateway
 
 volumes:
   mysql:
