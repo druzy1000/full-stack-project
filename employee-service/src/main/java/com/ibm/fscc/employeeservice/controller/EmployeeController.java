@@ -2,7 +2,6 @@ package com.ibm.fscc.employeeservice.controller;
 
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 
@@ -22,13 +21,10 @@ import com.ibm.fscc.employeeservice.repositories.EmployeeRepository;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 
-
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(path = "api")
 public class EmployeeController {
-	
-
 	
 	EmployeeRepository employeeRepository;
 	

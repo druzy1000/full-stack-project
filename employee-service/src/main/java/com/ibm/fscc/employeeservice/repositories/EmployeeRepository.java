@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import com.ibm.fscc.employeeservice.data.EmployeeEntity;
 
-
 @Repository
 public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long>{
 

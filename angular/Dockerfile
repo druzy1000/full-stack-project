@@ -1,10 +1,10 @@
-
-FROM node:12.7-alpine AS build
+FROM node:10
 LABEL maintainer="andrew.reyes@ibm.com"
 WORKDIR /usr/src/app
-COPY package.json package-lock.json ./
+COPY package*.json ./
 RUN npm install
+
 COPY . .
-EXPOSE 4200 4200
-RUN npm run build
-CMD npm start
+EXPOSE 4200
+
+CMD [ "npm", "start" ]
