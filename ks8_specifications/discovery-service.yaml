@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: discovery-service
+  namespace: full-stack-app
+  labels:
+    app: my-full-stack-app
+spec:
+  clusterIP: None
+  selector:
+    app: my-full-stack-app
+  ports:
+    - protocol: TCP
+      port: 8761
+      targetPort: 8761
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: discovery-service
+  namespace: full-stack-app
+  labels:
+    app: my-full-stack-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-full-stack-app
+  template:
+    metadata:
+      labels:
+        app: my-full-stack-app
+    spec:
+      containers:
+      - name: discovery-service
+        image: acreyes0704/full-stack-coding-challenge_discovery-service:latest
+        ports:
+        - containerPort: 8761
+        env:
+        - name: eureka.client.register-with-eureka
+          value: "false"
+        - name: eureka.client.fetch-registry
+          value: "false"
+

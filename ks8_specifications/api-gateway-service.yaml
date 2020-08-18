@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-gateway
+  namespace: full-stack-app
+  labels:
+    app: my-full-stack-app
+spec:
+  type: LoadBalancer
+  selector:
+    app: my-full-stack-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway
+  namespace: full-stack-app
+  labels:
+    app: my-full-stack-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-full-stack-app
+  template:
+    metadata:
+      labels:
+        app: my-full-stack-app
+    spec:
+      containers:
+      - name: api-gateway
+        image: acreyes0704/full-stack-coding-challenge_api-gateway:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: zuul.routes.login.path
+          value: "/login/**"
+        - name: zuul.routes.login.url
+          value: "http://login-service:8081/"
+        - name: zuul.routes.employee.path
+          value: "/employee/**"
+        - name: zuul.routes.employee.url
+          value: "http://employee-service:8082/"
+        - name: ribbon.eureka.enabled
+          value: "false"
+        - name: eureka.client.fetch-registry
+          value: "false"
+        - name: eureka.client.register-with-eureka
+          value: "false"

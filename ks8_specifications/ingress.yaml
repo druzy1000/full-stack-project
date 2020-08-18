@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ingress
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /
+  namespace: full-stack-app
+  labels:
+    app: my-full-stack-app
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /employee/api
+        backend:
+            serviceName: api-gateway
+            servicePort: 8080
+      - path: /login/api
+        backend:
+            serviceName: api-gateway
+            servicePort: 8080  

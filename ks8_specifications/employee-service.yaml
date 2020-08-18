@@ -1,0 +1,61 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: employee-service
+  namespace: full-stack-app
+  labels:
+    app: my-full-stack-app
+spec:
+  selector:
+    app: my-full-stack-app
+  ports:
+    - protocol: TCP
+      port: 8082
+      targetPort: 8082
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: employee-service
+  namespace: full-stack-app
+  labels:
+    app: my-full-stack-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-full-stack-app
+  template:
+    metadata:
+      labels:
+        app: my-full-stack-app
+    spec:
+      containers:
+      - name: employee-service
+        image: acreyes0704/full-stack-coding-challenge_employee-service:latest
+        ports:
+        - containerPort: 8082
+        env:
+        - name: spring.datasource.url
+          value: "jdbc:mysql://mysql:3306/employee"
+        - name: spring.datasource.username
+          value: "root"
+        - name: spring.datasource.password
+          value: "password"
+        - name: eureka.client.service-url.defaultZone
+          value: "http://discovery-service:8761/eureka/"
+        - name: spring.jpa.hibernate.ddl-auto
+          value: "none"
+        - name: spring.jpa.database-platform
+          value: "org.hibernate.dialect.MySQL8Dialect"
+        - name: spring.jpa.properties.hibernate.default_schema
+          value: "employee"       
+        - name: spring.jpa.show-sql
+          value: "true"
+        - name: spring.datasource.driver-class-name
+          value: "com.mysql.cj.jdbc.Driver" 
+        - name: logging.level.org.springframework.web
+          value: "DEBUG"
+        - name: logging.level.org.hibernate
+          value: "ERROR"          
+        
