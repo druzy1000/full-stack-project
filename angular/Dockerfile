@@ -6,5 +6,4 @@ RUN npm install
 
 COPY . .
 EXPOSE 4200
-
-CMD [ "npm", "run" "build"]
+CMD npm start

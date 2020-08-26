@@ -128,7 +128,7 @@ services:
   angular-ui:
     container_name: angular-ui
     restart: on-failure
-    image: acreyes0704/angular-ui:latest
+    image: acreyes0704/full-stack-coding-challenge_angular-ui:latest
     # build: 
     #   context: ./angular/
     #   dockerfile: Dockerfile

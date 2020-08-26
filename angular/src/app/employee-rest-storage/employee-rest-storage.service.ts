@@ -13,7 +13,7 @@ import { MessageService } from '../message.service';
 // @Injectable()
 export class EmployeeRestStorageService {
 
-  baseUrl: string = 'http://127.0.0.1:8080/employee/api';
+  baseUrl: string = 'http://ada0c3f8f059848f7ac03fb2498db75d-713297605.us-east-2.elb.amazonaws.com/employee/api';
   constructor(private http: HttpClient, private messageService: MessageService){}
 
 getEmployees(): Observable<Employee[]>{

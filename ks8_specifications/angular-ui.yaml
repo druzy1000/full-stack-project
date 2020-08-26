@@ -19,12 +19,12 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: angular-ui-deployment
+  name: angular-ui
   namespace: full-stack-app
   labels:
     app: my-full-stack-app
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: my-full-stack-app
@@ -35,6 +35,6 @@ spec:
     spec:
       containers:
       - name: angular-ui
-        image: acreyes0704/angular-ui:latest
+        image: acreyes0704/full-stack-coding-challenge_angular-ui:latest
         ports:
         - containerPort: 80

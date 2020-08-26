@@ -51,3 +51,17 @@ spec:
           value: "false"
         - name: eureka.client.register-with-eureka
           value: "false"
+        - name: eureka.client.eureka-server-connect-timeout-seconds
+          value: "60000"
+        - name: logging.level.org.springframework.web
+          value: "true"
+        - name: zuul.host.connect-timeout-millis
+          value: "60000"
+        - name: zuul.host.socket-timeout-millis
+          value: "60000"
+        - name: logging.level.org.hibernate
+          value: "ERROR"
+        - name: logging.level.org.springframework.web
+          value: "DEBUG"
+        - name: eureka.client.eureka-server-read-timeout-seconds
+          value: "60000"

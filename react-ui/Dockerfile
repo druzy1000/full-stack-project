@@ -1,4 +1,5 @@
 FROM node:10
+LABEL maintainer="andrew.reyes@ibm.com"
 WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm install
