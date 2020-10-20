@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const EMPLOYEE_API_URL = 'http://ada0c3f8f059848f7ac03fb2498db75d-713297605.us-east-2.elb.amazonaws.com/employee/api';
+const EMPLOYEE_API_URL = 'http://localhost:8080/employee/api';
 
 class EmployeeService {
 

@@ -44,12 +44,7 @@ export class LoginComponent implements OnInit {
       }
       this.loading = true;
       if (this.loginForm.value.email !== this.data.email && this.loginForm.value.password !== this.data.password) {
-        console.log(this.loginForm.value.email)
-        console.log(this.data.email)
-        console.log(this.loginForm.value.password)
-        console.log(this.data.password)
          alert("Login Failed");
-         //this.loading = false;
          return;
       }
         //alert('Login is Good')

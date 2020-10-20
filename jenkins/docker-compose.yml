@@ -8,6 +8,8 @@ services:
       - 8084:8080
     volumes:
       - jenkins_home:/var/jenkins_home
+      - jenkins_downloads:/var/jenkins_home/downloads
 
 volumes:
     jenkins_home:
+    jenkins_downloads:

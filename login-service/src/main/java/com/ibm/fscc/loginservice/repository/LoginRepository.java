@@ -8,6 +8,6 @@ import com.ibm.fscc.loginservice.data.LoginEntity;
 
 @Repository
 public interface LoginRepository extends JpaRepository<LoginEntity, String> {
-//	 public LoginEntity findByEmail(String email);
+	 LoginEntity findByEmail(String email);
 
 }

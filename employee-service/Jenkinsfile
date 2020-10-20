@@ -1,0 +1,54 @@
+def artifact
+pipeline {
+	// configure environmental variables
+	environment {
+	    registry = "https://registry.hub.docker.com"
+	    registryCredentials = "docker"
+	}
+	
+	// instruct jenkins to allocate executor and workspace for entire pipeline
+    agent { label 'master' } 
+    tools {
+        jdk 'JAVA_HOME'
+        maven 'MAVEN_HOME'
+    }
+    
+    stages {
+    	// compile and generate single executable jar with all dependencies
+        stage('test java installation') {
+            steps {
+                sh 'java -version'
+                sh 'which java'
+            }
+        }
+        stage('test maven installation') {
+            steps {
+                sh 'mvn -version'
+                sh 'which mvn'
+            }
+        }
+		// stage('Package') {
+        //     steps {
+        //         sh 'mvn install -Dmaven.test.skip=true'
+        //     }
+        // }
+        // build docker image of an application
+		stage('Build') {
+            steps {
+                script {
+                    artifact = docker.build("acreyes0704/full-stack-coding-challenge_employee-service:latest")
+                }
+            }
+        }
+        // push built docker image to docker hub
+		stage('Publish') {
+            steps {				
+                script {
+                    docker.withRegistry(registry, registryCredentials) {
+      					artifact.push("latest")
+    				}
+                }
+            }
+        }
+    }
+}
