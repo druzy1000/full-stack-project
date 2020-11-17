@@ -1,0 +1,51 @@
+  .container {
+    /* display: flex; */
+  }
+  
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 1rem;
+    
+  } 
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    
+  }
+  
+  th.mat-sort-header-sorted {
+    color: black;
+  }
+  
+  a.btn.btn-danger {
+    position: relative;
+    margin-left: 61rem;
+    margin-right: auto;
+    /* display: grid; */
+  }
+
+  button.trashCan {
+    border: none;
+    background: none;
+    font-size: 20px;
+    color: red;
+    margin: auto;
+    display: block;
+  }
+
+  div.buttonColumn {
+    display: flex;
+    flex-direction: row;
+  }
+
+  div.buttonColumn > * {
+    box-sizing: border-box;
+    position: relative;
+    /* margin-left: ; */
+    /* margin-right: 10rem; */
+  }
+  /* style="font-size:20px;color:red;text-align:center;display:block; */

@@ -7,14 +7,15 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http'; 
 
-import { AddEditComponent } from './add-edit/add-edit.component';
-import { EmployeeListComponent } from './employee-list/employee-list.component';
+import { AddEditComponent } from './components/add-edit/add-edit.component';
+import { EmployeeListComponent } from './components/employee-list/employee-list.component';
 import { EmployeeRestStorageService } from './employee-rest-storage/employee-rest-storage.service';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './components/login/login.component';
 import { MessagesComponent } from './messages/messages.component';
 
 
-import { NavbarComponent } from './navbar/navbar.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { NavbarService } from './services/navbar.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,6 @@ import { NavbarComponent } from './navbar/navbar.component';
     LoginComponent,
     NavbarComponent,
     MessagesComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -35,7 +35,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     HttpClientModule
   ],
   providers: [
-    EmployeeRestStorageService
+    EmployeeRestStorageService,
+    NavbarService
   ],
   bootstrap: [AppComponent]
 })

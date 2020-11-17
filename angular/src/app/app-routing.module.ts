@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { EmployeeListComponent } from './employee-list/employee-list.component';
-import { AddEditComponent } from './add-edit/add-edit.component';
-import { LoginComponent } from './login/login.component';
+import { EmployeeListComponent } from './components/employee-list/employee-list.component';
+import { AddEditComponent } from './components/add-edit/add-edit.component';
+import { LoginComponent } from './components/login/login.component';
 
 
 const routes: Routes = [
@@ -19,7 +19,7 @@ const routes: Routes = [
       component: AddEditComponent,
     },
     {
-      path: 'employeeList',
+      path: 'employees',
       component: EmployeeListComponent
     },
     { 

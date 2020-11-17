@@ -1,12 +1,13 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators, FormArray} from "@angular/forms";
 import { Location, LocationStrategy } from '@angular/common';
-import {Employee} from '../models/Employee';
-import { EmployeeRestStorageService } from '../employee-rest-storage/employee-rest-storage.service';
+import {Employee} from '../../models/Employee';
+import { EmployeeRestStorageService } from '../../employee-rest-storage/employee-rest-storage.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
-// import { EmloyeeList } from '../employee-list/employee-list.component'
+import { NavbarService } from '../../services/navbar.service'
+
 
 @Component({
   selector: 'add-edit',
@@ -14,20 +15,28 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./add-edit.component.css']
 })
 export class AddEditComponent implements OnInit {
-  addEditForm : FormGroup;
-  submitted = false;
-  loading= false;
-  @Input() employee;
-
-
+  public employees: Employee[];
+  public addEditForm : FormGroup;
+  public submitted = false;
+  public loading= false;
+  @Input() 
+  public employee;
 
   constructor(private employeeRestStorageService: EmployeeRestStorageService, 
               private formBuilder: FormBuilder,
               private route:ActivatedRoute,
-              private router: Router) 
+              private router: Router,
+              private nav: NavbarService) 
               {}
 
   get f() { return this.addEditForm.controls; }
+
+  getEmployeesFromService(){
+    // this.polling$ = interval(2000).pipe(startWith(0),switchMap(_ => this.employeeRestStorageService.getEmployees$()))
+    // .subscribe(data => this.employees = data, error => console.error(error))
+
+     this.employeeRestStorageService.getEmployees$().subscribe((data)=> {this.employees = data, console.log(data)});
+  }
 
   createForm() {
     this.addEditForm = this.formBuilder.group({
@@ -59,33 +68,40 @@ onAddEmployee() {
     console.log("Invalid")
       return;
   }
-  this.loading = true;
-  this.employeeRestStorageService.addEmployee(this.addEditForm.value)
-      .pipe(first())
-      .subscribe(
-          data => {
-              this.router.navigate(['/employeeList']);
-          },
-          error => {
-              this.loading = false;
-          });
+    this.employeeRestStorageService.addEmployee(this.addEditForm.value)
+    .pipe(first())
+    .subscribe(
+        () => {
+            this.getEmployeesFromService();
+            this.router.navigate(['employees']);
+        });
 }
 
 onUpdateEmployee() {
-  this.submitted = true;
-  if (this.addEditForm.invalid) {
-    console.log("Invalid")
-      return;
-  }
+  // this.submitted = true;
+try {
   this.extractEmployeeFromForm();
   this.loading = true;
   this.employeeRestStorageService.updateEmployee(this.employee).subscribe(
-    () => this.router.navigate(['employeeList'])
-  )
+    () => {
+      // this.getEmployeesFromService()
+      this.router.navigate(['employees'])
+    })
+} catch (error) {
+  if (this.addEditForm.invalid) {
+    console.log("Invalid")
+      return error
+  }
+  return error
+}
+
+
+
+
 }
 
 onSubmit(){
-  if(this.employee.employeeId === null){
+  if(this.employee.employeeId === 0 || this.employee.employeeId === null){
     this.onAddEmployee();
   }
   else {
@@ -98,7 +114,7 @@ getEmployee(employeeId:number) {
   console.log(employeeId)
   if(employeeId === 0){
     this.employee = {
-      id: null,
+      id: 0,
       userId: null,
       firstName: null,
       lastName: null,
@@ -109,11 +125,10 @@ getEmployee(employeeId:number) {
       homePhone: null,
       cellPhone: null,
       email: null,
-      // password: null
     }
   }
   else{
-    this.employee = this.employeeRestStorageService.getEmployee(employeeId)
+      this.employee = this.employeeRestStorageService.getEmployee(employeeId)
       .subscribe(employee => {
         this.employee = employee;
         this.addEditForm.setValue({
@@ -127,7 +142,6 @@ getEmployee(employeeId:number) {
           cellPhone: this.employee.cellPhone,
           email: this.employee.email
         })
-
       })
   }
 }
@@ -144,6 +158,7 @@ extractEmployeeFromForm() {
 }
 
   ngOnInit() {
+    this.nav.hide();
     this.route.paramMap.subscribe(params =>{
      const id = +params.get('id')
       this.getEmployee(id);
@@ -151,6 +166,5 @@ extractEmployeeFromForm() {
     this.createForm();
   }
   
-
 }
 
