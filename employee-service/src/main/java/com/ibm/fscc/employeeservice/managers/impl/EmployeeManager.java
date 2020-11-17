@@ -42,12 +42,12 @@ public class EmployeeManager implements IEmployeeManager {
 	}
 
 	@Override
-	public EmployeeEntity deleteEmployee(Long id) {
+	public void deleteEmployee(Long id) {
 		EmployeeEntity employee = employeeRepository.getOne(id);
-		if(employee == null) {
-			return null;
-		}
+//		if(employee == null) {
+//			return null;
+//		}
 		employeeRepository.deleteById(id);
-		return employee;
+//		return employee;
 	}
 }

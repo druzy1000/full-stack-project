@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, Validators} from '@angular/forms';
-import { Employee } from '../models/Employee';
+import { Employee } from '../../models/Employee';
 
 
 @Component({
@@ -32,8 +32,12 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  get email() { return this.loginForm.get('email'); }
-  get password() {return this.loginForm.get('password'); }
+  // get email() { return this.loginForm.get('email'); }
+  // get password() {return this.loginForm.get('password'); }
+
+  // onSubmit(){
+  //   console.log(this.loginForm.value.email,this.loginForm.value.password)
+  // }
 
   onSubmit() {
     this.submitted = true;
@@ -44,17 +48,15 @@ export class LoginComponent implements OnInit {
       }
       this.loading = true;
       if (this.loginForm.value.email !== this.data.email && this.loginForm.value.password !== this.data.password) {
-        console.log(this.loginForm.value.email)
-        console.log(this.data.email)
-        console.log(this.loginForm.value.password)
-        console.log(this.data.password)
          alert("Login Failed");
          //this.loading = false;
          return;
       }
         //alert('Login is Good')
-        this.router.navigate(['employeeList'])
+        this.router.navigate(['employees'])
   }
+
+  
 
    ngOnInit() {
     this.createForm();
