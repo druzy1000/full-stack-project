@@ -1,0 +1,47 @@
+.card{
+    margin-top: 20px;
+    position: relative;
+    display: block;
+    padding-top: 10px;
+    width: 40rem;
+}
+
+#line{
+    margin-right: 233px;
+}
+
+.background{
+    background-position: center;
+    background-color: grey;
+}
+.panel-heading{
+    margin: auto
+}
+
+h6{
+    font-weight: bold;
+    color: white; 
+    margin-left:37%;
+}
+
+div.row.form-group{
+    margin: 20px;
+}
+
+span.col-sm-2{
+    /* margin-right: 5px; */
+    padding: 0px 0px 0px 0px;
+}
+div.container{
+    width:auto;
+}
+.buttons{
+    /* justify-content: flex-start; */
+    /* display: flex;
+    flex-direction: row; */
+    margin-bottom: 20px;
+    text-align: center;
+    margin-left: 5px;
+    /* margin-left: 32px;
+    margin-right:32px; */
+}

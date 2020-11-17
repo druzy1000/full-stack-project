@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavbarService } from '../../services/navbar.service'
 
 @Component({
   selector: 'navbar',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  title: string = "Coding Challenge";
+  constructor(public nav: NavbarService) { }
 
   ngOnInit() {
+    this.nav.setTitle(this.title);
+    // console.log(this.title)
   }
 
 }

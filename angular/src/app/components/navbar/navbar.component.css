@@ -1,0 +1,9 @@
+span.navbar-brand.mb-0.h1 {
+    /* margin-left: auto; */
+    margin-right: auto;
+    padding-left: 2rem;
+}
+
+a.btn.btn-primary{
+    margin-right:10rem;
+}
