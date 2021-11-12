@@ -1,0 +1,48 @@
+version: "3"
+services:
+  login-db:
+    image: mysql
+    restart: on-failure
+    container_name: login-db
+    env_file:
+      - .env
+    environment:
+      - MYSQL_DATABASE=login
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    ports:
+      - 3307:3307
+    networks:
+      - backend-network
+    command: --init-file /data/application/init.sql
+    volumes:
+      - ./sql/init-login.sql:/data/application/init.sql
+      - login-db:/var/lib/mysql
+
+  employee-db:
+    image: mysql
+    restart: on-failure
+    container_name: employee-db
+    env_file:
+      - .env
+    environment:
+      - MYSQL_DATABASE=employee
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    ports:
+      - 3308:3308
+    networks:
+      - backend-network
+    command: --init-file /data/application/init.sql
+    volumes:
+      - ./sql/init-employee.sql:/data/application/init.sql
+      - employee-db:/var/lib/mysql
+
+volumes:
+  login-db:
+  employee-db:
+
+networks:
+  backend-network:
